@@ -15,7 +15,9 @@ To reproduce
 
 It may build ok in this state but the extra Stripe.xcframework entry will persist in the workspace json file. The failure potential seems to depend on the ordering of that artifacts in the json file. There are various scnearios where this added entry will cause problems later with additional workspace changes. You can even land into states where the Stripe Framework is _only_ in the MyFramework directory. In that case things will seem to work for  a while and then suddenly fail when it tries to find the artifact in the BinaryFrameworks directory, which doens't exists. This issue is confusing but hopefully the example above can at least reproduce the bad state that seems to be triggering various problems.
 
-**Example 1 workspace-state.json**
+**Example 1 workspace-state.json** 
+
+This is before encountering any problems.
   
   ```
   {
@@ -44,6 +46,9 @@ It may build ok in this state but the extra Stripe.xcframework entry will persis
 ```
 
 **Example 2 workspace-state.json**
+
+
+This is after the packages updates on a bad network. Note the stripe framework is now being associated with the MyLibrary package, which should have no relation.
 ```
   {
   "object": {
