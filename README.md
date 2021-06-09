@@ -13,7 +13,7 @@ To reproduce
 - File -> Swift Packages -> Update to Latest Package Versions
 - Try to build: You may receive errors that it cannot find the Stripe framework. 
 
-It may build ok. But either way the extra Stripe.xcframework entry will persist in the workspace json file. There are various scnearios where this added entry will cause problems later with additional workspace changes. You can even land into states where the Stripe Framework is _only_ since the MyFramework directory. In that case things will seem to work ok for a while and then suddenly fail when it tries to find the artifact in the correct framework. This issue is confusing but hopefully the example above can be reproduced.
+It may build ok. But either way the extra Stripe.xcframework entry will persist in the workspace json file. The failure potential seems to depend on the ordering of that artifacts in that file too. There are various scnearios where this added entry will cause problems later with additional workspace changes. You can even land into states where the Stripe Framework is _only_ since the MyFramework directory. In that case things will seem to work ok for a while and then suddenly fail when it tries to find the artifact in the correct framework. This issue is confusing but hopefully the example above can be reproduced.
 
 **Example 1 workspace-state.json**
   
