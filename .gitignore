@@ -1,0 +1,17 @@
+.DS_Store
+.build
+Package.resolved
+.swiftpm
+
+build/
+Index/
+
+*.pbxuser
+*.perspective
+*.perspectivev3
+
+*.mode1v3
+*.mode2v3
+
+*.xccheckout
+xcuserdata
