@@ -1,12 +1,12 @@
-This test app will demonstate a failure when using local swift packages with binary targets. If the swift packages attempt to update or resolve while there is no internet connection, the package workspace seems to become corrupted.
+This test app will demonstate a failure when using local swift packages with binary targets. If the swift packages attempt to update or resolve while on a bad newtwork (ex: resources needed over VPN while not on VPN), the package workspace seems to become corrupted.
 
 To reproduce
 
 - Open the xcode workspace and build 1 time successfully.
 - Inspect your `<derived data>/SourcePackages/artifacts` directory. You should see a `BinaryFrameworks/Stripe.xcframework` entry (expected)
 - Inspect the `<derived data>/SourcePackages/workspace-state.json` file. You should see json, like in example 1 below (expected).
-- Go offline with `networksetup -setairportpower en0 off` from mac command line.
-- File -> Swift Packages -> Update to Latest Package Versions. You should see an error in Xcode "artifact of binary target `Stripe` failed to download".
+- Go offline with `networksetup -setairportpower en0 off` from mac command line. This part can also be demonstrated with resources that require the VPN, when not on the VPN.
+- File -> Swift Packages -> Update to Latest Package Versions. You should see an error in Xcode "artifact of binary target 'Stripe' failed to download".
 - Inspect your `<derived data>/SourcePackages/artifacts` directory again and observe a new directory "MyFramework" that now lives along side the aforementioned BinaryFrameworks directory. This is surprising as the MyFramework swift package does not have any artifacts/binary framework associated with it.
 - Also inspect the `<derived data>/SourcePackages/workspace-state.json` file again. It should look like like in example 2 below. Observe it lists the Stripe.xcframework as being a member of the "MyFramework" directory which also seems incorrect. 
 - Go back online with `networksetup -setairportpower en0 on` from mac command line.
